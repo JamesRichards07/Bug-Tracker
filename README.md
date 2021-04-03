@@ -10,4 +10,7 @@ Semi-Essential Feature to Include - Priority on tickets, references(links, scree
 
 Nice-to-have - Search on all pages, elasped time on tickets, UI customization.
 
+When running the api container use docker run --publish 8080:8080 <file name>
+
+
 
