@@ -12,5 +12,35 @@ Nice-to-have - Search on all pages, elasped time on tickets, UI customization.
 
 When running the api container use docker run --publish 8080:8080 <file name>
 
+# How to run Bug-Tracker
+Build api image: 
+    -navigate to the /api folder
+    -docker build -t <image name> .
 
+Start Docker-compose: docker-compose up --build
 
+Stop Docker-compose: docker-compose down
+
+Grab container list: docker ps -a
+Stop container: docker stop <container id>
+
+Grab image list: docker images
+Remove image: docker rmi <image id>
+
+# Written in Typescript
+Installed locally using: npm install --save-dev-typescript
+Created tsconfig.json file: tsc --init
+Compile into javascript using Command+Shift+B
+Installed express using <npm install -D @types/exxpress>
+
+# Access mysql container
+docker exec -it <container id> bash
+mysql -u root -p<MYSQL_ROOT_PASSWORD> 
+it should show "mysql>"
+
+# Access database inside mysql
+show databases;
+use <db name>;
+
+# Use mysql manual (make sure the version is correct).
+https://dev.mysql.com/doc/refman/8.0/en/creating-tables.html

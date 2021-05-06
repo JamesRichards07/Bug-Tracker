@@ -1,6 +1,13 @@
-import { userInfo } from 'node:os';
-import 'reflect-metadata';
+import { type, userInfo } from 'node:os';
+import { Type } from 'typescript';
+require ('reflect-metadata');
 import { Entity, PrimaryGeneratedColumn, Column, Timestamp, ManyToOne } from "typeorm";
+// const typeorm = require("typeorm");
+// const Entity = typeorm.Entity;
+// const PrimaryGeneratedColumn = typeorm.PrimaryGeneratedColumn;
+// const Column = typeorm.Column;
+// const Timestamp = typeorm.Timestamp;
+// const ManyToOne = typeorm.ManyToOne;
 import {Users} from "./user.js"
 
 @Entity()

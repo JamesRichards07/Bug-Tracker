@@ -10,42 +10,51 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Bugs = void 0;
-require("reflect-metadata");
-const typeorm_1 = require("typeorm");
-const user_js_1 = require("./user.js");
-let Bugs = class Bugs {
-};
-__decorate([
-    typeorm_1.PrimaryGeneratedColumn({
-        zerofill: true,
-    }),
-    __metadata("design:type", Number)
-], Bugs.prototype, "id", void 0);
-__decorate([
-    typeorm_1.Column({
-        type: "timestamp"
-    }),
-    __metadata("design:type", typeorm_1.Timestamp)
-], Bugs.prototype, "created", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], Bugs.prototype, "application", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], Bugs.prototype, "description", void 0);
-__decorate([
-    typeorm_1.ManyToOne(() => user_js_1.Users, user => user.submitter),
-    __metadata("design:type", String)
-], Bugs.prototype, "submitter", void 0);
-__decorate([
-    typeorm_1.ManyToOne(() => user_js_1.Users, user => user.processor),
-    __metadata("design:type", String)
-], Bugs.prototype, "processor", void 0);
-Bugs = __decorate([
-    typeorm_1.Entity()
-], Bugs);
+require('reflect-metadata');
+var typeorm_1 = require("typeorm");
+// const typeorm = require("typeorm");
+// const Entity = typeorm.Entity;
+// const PrimaryGeneratedColumn = typeorm.PrimaryGeneratedColumn;
+// const Column = typeorm.Column;
+// const Timestamp = typeorm.Timestamp;
+// const ManyToOne = typeorm.ManyToOne;
+var user_js_1 = require("./user.js");
+var Bugs = /** @class */ (function () {
+    function Bugs() {
+    }
+    __decorate([
+        typeorm_1.PrimaryGeneratedColumn({
+            zerofill: true,
+        }),
+        __metadata("design:type", Number)
+    ], Bugs.prototype, "id", void 0);
+    __decorate([
+        typeorm_1.Column({
+            type: "timestamp"
+        }),
+        __metadata("design:type", typeorm_1.Timestamp)
+    ], Bugs.prototype, "created", void 0);
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], Bugs.prototype, "application", void 0);
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], Bugs.prototype, "description", void 0);
+    __decorate([
+        typeorm_1.ManyToOne(function () { return user_js_1.Users; }, function (user) { return user.submitter; }),
+        __metadata("design:type", String)
+    ], Bugs.prototype, "submitter", void 0);
+    __decorate([
+        typeorm_1.ManyToOne(function () { return user_js_1.Users; }, function (user) { return user.processor; }),
+        __metadata("design:type", String)
+    ], Bugs.prototype, "processor", void 0);
+    Bugs = __decorate([
+        typeorm_1.Entity()
+    ], Bugs);
+    return Bugs;
+}());
 exports.Bugs = Bugs;
 ;
 //# sourceMappingURL=bugs.js.map

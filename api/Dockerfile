@@ -4,7 +4,7 @@ FROM node:latest
 WORKDIR /app
 
 # 1.) Copies the package.json file within the local Bug-Tracker folder and 2.) copies it into the workdir in Docker.
-COPY /main/package.json /app
+COPY /package.json /app
 
 #runs npm install inside the workdir
 RUN npm install
@@ -15,4 +15,4 @@ COPY . /app
 EXPOSE 8080
 
 #does not execute when the image is created but when a container is created
-CMD ["node", "/app/main/server.js"]
+CMD ["node", "/app/server.js"]

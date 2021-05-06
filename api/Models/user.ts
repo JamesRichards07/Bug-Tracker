@@ -1,4 +1,4 @@
-import "reflect-metadata";
+//require("reflect-metadata");
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 export enum UserRole {
     MANAGER = "manager", 

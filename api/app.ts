@@ -1,35 +1,18 @@
 const express = require('express');
 const app = express();
-import 'reflect-metadata';
-import "typeorm";
+const typeORM = require("typeorm");
+require('reflect-metadata');
 import {Request, Response, NextFunction} from "express";
+import { connect } from "node:http2";
+import {createConnection, Connection, getConnection } from "typeorm";
 
 import { NewLineKind } from 'typescript';
+import { Users } from "./Models/user";
 
-/*const http = require('http');
+const bugs = require("./Models/bugs.js");
 
-const port = 8080;
+const user = require("./Models/user.js");
 
-console.log("Before server");
-http.createServer(app).listen(port, function(err: any)
-{
-  if (err)
-  {
-    console.log(err);
-  }
-  else
-  {
-    console.log(`Example app listening at http://localhost:${port}`)
-  }
-});*/
-
-// console.log("Before Bugs");
-// const bugs = require("./models/bugs.js");
-
-// console.log("Before User");
-// const User = require("./models/user.js");
-
-console.log("app.js");
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.send('Persistant data???');
 
@@ -43,65 +26,72 @@ app.get('/bugs', (req: Request, res: Response, next: NextFunction) => {
   res.send('Bug data!');
 });
 
-/*import { createConnection, Connection, getConnection } from 'typeorm';
-import { Users } from './models/user';
-import { Bugs } from './models/bugs';
+createConnection()
+  .then(async connection => {
+    let users = new Users();
+    users.firstName = "James";   
+    users.lastName = "Richards";
+    users.email = "hand2thesword@gmail.com";
+    users.team = "Alpha";
+    users.position = [];
+    users.submitter = null;     
+    users.processor = null;
+    
+    async() => await connection.manager.save(users);
+    console.log("Users has been saved");
+  })
+  .catch(error => console.log(error));
 
-console.log("Stated");
-async () => {createConnection()};
+// const newUser = async() => {
+// //app.post('/Users', (req: Request, res: Response, next: NextFunction) => {
+//   const users = await getConnection()
+//     .createQueryBuilder()
+//     .insert()
+//     .into(user)
+//     .values([
+//       {firstName: "James",   
+//       lastName: "Richards",
+//       email: "hand2thesword@gmail.com",
+//       team: "Alpha",
+//       position: [],
+//       submitter: null,     
+//       processor: null     
+//       }]
+//     )
+//     .execute();
 
-console.log("Connection Created");
-
-const newUser = async() => {
-//app.post('/Users', (req: Request, res: Response, next: NextFunction) => {
-  const user = await getConnection()
-    .createQueryBuilder()
-    .insert()
-    .into(Users)
-    .values([
-      {firstName: "James",   
-      lastName: "Richards",
-      email: "hand2thesword@gmail.com",
-      team: "Alpha",
-      position: [],
-      submitter: null,     
-      processor: null     
-      }]
-    )
-    .execute();
-
-  user;
-};
+//   users;
+//   console.log("User created:" + users);
+// };
 //});
 
-newUser;
-
-console.log(newUser);
+// console.log(newUser);
 
 // import { createConnection, Connection, getConnection } from 'typeorm';
 // import { Users } from './models/user';
 
-const newBug = async() => {
-  //app.post("/bugs", (req: Request, res: Response, next: NextFunction) => {
-    const bug = await getConnection()
-    .createQueryBuilder()
-    .insert()
-    .into(Bugs)
-    .values([
-      {application: "Math",
-      description: "My first bug",
-      submitter: "James",  
-      processor: null    
-    }]
-    )
-    .execute();
+// const newBug = async() => {
+//   //app.post("/bugs", (req: Request, res: Response, next: NextFunction) => {
+//     const bug = await getConnection()
+//     .createQueryBuilder()
+//     .insert()
+//     .into(bugs)
+//     .values([
+//       {application: "Math",
+//       description: "My first bug",
+//       submitter: "James",  
+//       processor: null    
+//     }]
+//     )
+//     .execute();
 
-    bug;
-};
+//     bug;
+//     console.log("Bug created:" + bug);
+//};
 //})
 
-newBug;
+// newBug;
 
-console.log(newBug);*/
+// console.log(newBug);
 
 module.exports = app;
