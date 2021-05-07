@@ -7,7 +7,7 @@ export enum UserRole {
 };
 import {Bugs} from "./bugs.js";
 
-@Entity({name: "Users"})
+@Entity({name: "User"})
 export class Users {
     @PrimaryGeneratedColumn("uuid")
     id: number;

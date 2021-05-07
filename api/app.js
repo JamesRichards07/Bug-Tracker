@@ -38,41 +38,51 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require('express');
 var app = express();
-var typeORM = require("typeorm");
+require("typeorm");
 require('reflect-metadata');
 var typeorm_1 = require("typeorm");
-var user_1 = require("./Models/user");
+//import { Users } from "./Models/user";
 var bugs = require("./Models/bugs.js");
-var user = require("./Models/user.js");
-app.get('/', function (req, res, next) {
-    res.send('Persistant data???');
-});
-app.get('/users', function (req, res, next) {
-    res.send('User data!');
-});
-app.get('/bugs', function (req, res, next) {
-    res.send('Bug data!');
-});
+var User = require("./Models/user.js");
+// app.get('/', (req: Request, res: Response, next: NextFunction) => {
+//   res.send('Persistant data???');
+// });
+// app.get('/user', (req: Request, res: Response, next: NextFunction) => {
+//   res.send('User data!');
+// });
+// app.get('/bugs', (req: Request, res: Response, next: NextFunction) => {
+//   res.send('Bug data!');
+// });
+console.log("About to create a connection");
 typeorm_1.createConnection()
     .then(function (connection) { return __awaiter(void 0, void 0, void 0, function () {
-    var users;
+    var user, users;
     return __generator(this, function (_a) {
-        users = new user_1.Users();
-        users.firstName = "James";
-        users.lastName = "Richards";
-        users.email = "hand2thesword@gmail.com";
-        users.team = "Alpha";
-        users.position = [];
-        users.submitter = null;
-        users.processor = null;
-        (function () { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, connection.manager.save(users)];
-                case 1: return [2 /*return*/, _a.sent()];
-            }
-        }); }); });
-        console.log("Users has been saved");
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0:
+                console.log("New user");
+                user = new User();
+                user.firstName = "James";
+                user.lastName = "Richards";
+                user.email = "hand2thesword@gmail.com";
+                user.team = "Alpha";
+                user.position = [];
+                user.submitter = null;
+                user.processor = null;
+                (function () { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, connection.manager.save(User, user)];
+                        case 1: return [2 /*return*/, _a.sent()];
+                    }
+                }); }); });
+                console.log("Users has been saved with id" + user.id);
+                console.log("Loading from database...");
+                return [4 /*yield*/, connection.manager.find(User)];
+            case 1:
+                users = _a.sent();
+                console.log("Loaded users: ", users);
+                return [2 /*return*/];
+        }
     });
 }); })
     .catch(function (error) { return console.log(error); });

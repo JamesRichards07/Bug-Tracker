@@ -2,7 +2,23 @@
     "type": "mysql",
     "host": "localhost",
     "port": 3306,
-    "username": "james",
-    "password": "example",
-    "database": "bugtrackerdb"
-}
+    "username": "test",
+    "password": "test",
+    "database": "bugtrackerdb",
+    "synchronize": true,
+    "logging": false,
+    "entities": [
+       "api/Models/**/*.ts"
+    ],
+    "migrations": [
+       "api/migration/**/*.ts"
+    ],
+    "subscribers": [
+       "api/subscriber/**/*.ts"
+    ],
+    "cli": {
+       "entitiesDir": "api/Models",
+       "migrationsDir": "api/migration",
+       "subscribersDir": "api/subscriber"
+    }
+ }

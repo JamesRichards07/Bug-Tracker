@@ -69,7 +69,7 @@ var Users = /** @class */ (function () {
         __metadata("design:type", Object)
     ], Users.prototype, "processor", void 0);
     Users = __decorate([
-        typeorm_1.Entity({ name: "Users" })
+        typeorm_1.Entity({ name: "User" })
     ], Users);
     return Users;
 }());

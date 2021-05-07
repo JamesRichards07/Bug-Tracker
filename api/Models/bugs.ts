@@ -10,7 +10,7 @@ import { Entity, PrimaryGeneratedColumn, Column, Timestamp, ManyToOne } from "ty
 // const ManyToOne = typeorm.ManyToOne;
 import {Users} from "./user.js"
 
-@Entity()
+@Entity({name: "bugs"})
 export class Bugs {
 
     @PrimaryGeneratedColumn({

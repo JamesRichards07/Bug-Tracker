@@ -51,7 +51,7 @@ var Bugs = /** @class */ (function () {
         __metadata("design:type", String)
     ], Bugs.prototype, "processor", void 0);
     Bugs = __decorate([
-        typeorm_1.Entity()
+        typeorm_1.Entity({ name: "bugs" })
     ], Bugs);
     return Bugs;
 }());

@@ -1,24 +1,24 @@
 const express = require('express');
 const app = express();
-const typeORM = require("typeorm");
+//require("typeorm");
 require('reflect-metadata');
 import {Request, Response, NextFunction} from "express";
 import { connect } from "node:http2";
 import {createConnection, Connection, getConnection } from "typeorm";
 
 import { NewLineKind } from 'typescript';
-import { Users } from "./Models/user";
+//import { Users } from "./Models/user";
 
 const bugs = require("./Models/bugs.js");
 
-const user = require("./Models/user.js");
+const User = require("./Models/user.js");
 
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.send('Persistant data???');
 
 });
 
-app.get('/users', (req: Request, res: Response, next: NextFunction) => {
+app.get('/user', (req: Request, res: Response, next: NextFunction) => {
   res.send('User data!');
 });
 
@@ -26,19 +26,25 @@ app.get('/bugs', (req: Request, res: Response, next: NextFunction) => {
   res.send('Bug data!');
 });
 
+console.log("About to create a connection");
 createConnection()
   .then(async connection => {
-    let users = new Users();
-    users.firstName = "James";   
-    users.lastName = "Richards";
-    users.email = "hand2thesword@gmail.com";
-    users.team = "Alpha";
-    users.position = [];
-    users.submitter = null;     
-    users.processor = null;
+    console.log("New user");
+    const user = new User();
+    user.firstName = "James";   
+    user.lastName = "Richards";
+    user.email = "hand2thesword@gmail.com";
+    user.team = "Alpha";
+    user.position = [];
+    user.submitter = null;     
+    user.processor = null;
     
-    async() => await connection.manager.save(users);
-    console.log("Users has been saved");
+    await connection.manager.save(User, user);
+    console.log("Users has been saved with id" + user.id);
+
+    console.log("Loading from database...");
+    const users = await connection.manager.find(User);
+    console.log("Loaded users: ", users);
   })
   .catch(error => console.log(error));
 
