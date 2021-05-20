@@ -1,6 +1,6 @@
 require ('reflect-metadata');
-import { Entity, PrimaryGeneratedColumn, Column, Timestamp, ManyToOne } from "typeorm";
-import {Users} from "./user.js"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import {Users} from "./user"
 
 @Entity({name: "bugs"})
 export class Bugs {
@@ -13,7 +13,7 @@ export class Bugs {
     @Column({
         type: "date",
     })
-    created: string = "01/01/2020" ;
+    created: string = "";
 
     @Column({nullable: false})
     application: string = "";

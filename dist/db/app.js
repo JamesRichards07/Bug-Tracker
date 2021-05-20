@@ -1,23 +1,26 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-//const express =  require("express");
+var express_1 = __importDefault(require("express"));
 //import * as express from "express";
-const express = require("express");
-const app = express();
+//import express = require('express');
+var app = express_1.default();
 require("reflect-metadata");
-const typeorm_1 = require("typeorm");
-const bugs = require("./Models/bugs.js");
-const User = require("./Models/user.js");
-app.get('/', (req, res, next) => {
+var typeorm_1 = require("typeorm");
+var bugs = require("./Models/bugs.ts");
+var User = require("./Models/user.ts");
+app.get('/', function (req, res, next) {
     res.send('Persistant data???');
 });
-app.get('/user', (req, res, next) => {
+app.get('/user', function (req, res, next) {
     res.send('User data!');
 });
-app.get('/bugs', (req, res, next) => {
+app.get('/bugs', function (req, res, next) {
     res.send('Bug data!');
 });
-const connectionManager = typeorm_1.getConnectionManager();
+var connection = typeorm_1.getConnection();
 //   .then(async connection => {
 //     console.log("New user");
 //     const user = new User();

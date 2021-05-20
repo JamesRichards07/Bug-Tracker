@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Users = exports.UserRole = void 0;
 require("reflect-metadata");
-const typeorm_1 = require("typeorm");
+var typeorm_1 = require("typeorm");
 var UserRole;
 (function (UserRole) {
     UserRole["MANAGER"] = "manager";
@@ -19,9 +19,9 @@ var UserRole;
     UserRole["DEVELOPER"] = "developer";
 })(UserRole = exports.UserRole || (exports.UserRole = {}));
 ;
-const bugs_js_1 = require("./bugs.js");
-let Users = class Users {
-    constructor() {
+var bugs_1 = require("./bugs");
+var Users = /** @class */ (function () {
+    function Users() {
         this.id = 0;
         this.firstName = "";
         this.lastName = "";
@@ -31,54 +31,55 @@ let Users = class Users {
         this.submitter = 0;
         this.processor = 0;
     }
-};
-__decorate([
-    typeorm_1.PrimaryGeneratedColumn("uuid"),
-    __metadata("design:type", Number)
-], Users.prototype, "id", void 0);
-__decorate([
-    typeorm_1.Column({
-        type: "varchar",
-        length: 15
-    }),
-    __metadata("design:type", String)
-], Users.prototype, "firstName", void 0);
-__decorate([
-    typeorm_1.Column({
-        type: "varchar",
-        length: 25
-    }),
-    __metadata("design:type", String)
-], Users.prototype, "lastName", void 0);
-__decorate([
-    typeorm_1.Column({
-        type: "varchar",
-        unique: true,
-    }),
-    __metadata("design:type", String)
-], Users.prototype, "email", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], Users.prototype, "team", void 0);
-__decorate([
-    typeorm_1.Column({
-        type: "set",
-        enum: UserRole,
-        default: [UserRole.DEVELOPER]
-    }),
-    __metadata("design:type", String)
-], Users.prototype, "position", void 0);
-__decorate([
-    typeorm_1.OneToMany(() => bugs_js_1.Bugs, bugs => bugs.submitter),
-    __metadata("design:type", Object)
-], Users.prototype, "submitter", void 0);
-__decorate([
-    typeorm_1.OneToMany(() => bugs_js_1.Bugs, bugs => bugs.processor),
-    __metadata("design:type", Object)
-], Users.prototype, "processor", void 0);
-Users = __decorate([
-    typeorm_1.Entity({ name: "User" })
-], Users);
+    __decorate([
+        typeorm_1.PrimaryGeneratedColumn("uuid"),
+        __metadata("design:type", Number)
+    ], Users.prototype, "id", void 0);
+    __decorate([
+        typeorm_1.Column({
+            type: "varchar",
+            length: 15
+        }),
+        __metadata("design:type", String)
+    ], Users.prototype, "firstName", void 0);
+    __decorate([
+        typeorm_1.Column({
+            type: "varchar",
+            length: 25
+        }),
+        __metadata("design:type", String)
+    ], Users.prototype, "lastName", void 0);
+    __decorate([
+        typeorm_1.Column({
+            type: "varchar",
+            unique: true,
+        }),
+        __metadata("design:type", String)
+    ], Users.prototype, "email", void 0);
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], Users.prototype, "team", void 0);
+    __decorate([
+        typeorm_1.Column({
+            type: "set",
+            enum: UserRole,
+            default: [UserRole.DEVELOPER]
+        }),
+        __metadata("design:type", String)
+    ], Users.prototype, "position", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function () { return bugs_1.Bugs; }, function (bugs) { return bugs.submitter; }),
+        __metadata("design:type", Object)
+    ], Users.prototype, "submitter", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function () { return bugs_1.Bugs; }, function (bugs) { return bugs.processor; }),
+        __metadata("design:type", Object)
+    ], Users.prototype, "processor", void 0);
+    Users = __decorate([
+        typeorm_1.Entity({ name: "User" })
+    ], Users);
+    return Users;
+}());
 exports.Users = Users;
 //# sourceMappingURL=user.js.map

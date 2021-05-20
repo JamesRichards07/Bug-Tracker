@@ -35,7 +35,7 @@ Installed express using <npm install -D @types/exxpress>
 
 # Access mysql container
 docker exec -it <container id> bash
-mysql -u root -p<MYSQL_ROOT_PASSWORD> 
+psql -h localhost -p<port number> -U <user name> <database name>
 it should show "mysql>"
 
 # Access database inside mysql

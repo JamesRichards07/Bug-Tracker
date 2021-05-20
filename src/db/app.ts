@@ -1,16 +1,16 @@
-const express =  require("express");
+import express, { Application, Request, Response, NextFunction } from "express";
+import { createConnection } from "net";
 //import * as express from "express";
 //import express = require('express');
 const app = express();
-const metadata = require('reflect-metadata');
-import {Request, Response, NextFunction} from "express";
+import 'reflect-metadata';
 import {getConnectionManager, Connection, getConnection} from "typeorm";
 
 import { NewLineKind } from 'typescript';
 
-const bugs = require("./Models/bugs.js");
+const bugs = require("./Models/bugs.ts");
 
-const User = require("./Models/user.js");
+const User = require("./Models/user.ts");
 
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.send('Persistant data???');
@@ -25,7 +25,7 @@ app.get('/bugs', (req: Request, res: Response, next: NextFunction) => {
   res.send('Bug data!');
 });
 
-const connectionManager = getConnectionManager();
+//const connection: Connection = async() => {await createConnection};
 //   .then(async connection => {
 //     console.log("New user");
 //     const user = new User();

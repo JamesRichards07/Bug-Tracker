@@ -5,7 +5,7 @@ export enum UserRole {
     SUPERVISOR = "supervisor", 
     DEVELOPER = "developer"
 };
-import {Bugs} from "./bugs.js";
+import {Bugs} from "./bugs";
 
 @Entity({name: "User"})
 export class Users {
