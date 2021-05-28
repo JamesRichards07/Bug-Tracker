@@ -35,12 +35,19 @@ Installed express using <npm install -D @types/exxpress>
 
 # Access mysql container
 docker exec -it <container id> bash
-psql -h localhost -p<port number> -U <user name> <database name>
-it should show "mysql>"
+psql -h localhost -p 5432 -U postgres -W
+<Enter password>
+it should show "postgres"
 
-# Access database inside mysql
-show databases;
-use <db name>;
+# List databases inside postgres
+use \l or \list
+
+# Access databases inside postgres
+use \c <database name> or \connect <databse name>
+<enter password>
+
+# List tables inside a postgres database
+\dt
 
 # Use mysql manual (make sure the version is correct).
 https://dev.mysql.com/doc/refman/8.0/en/creating-tables.html
