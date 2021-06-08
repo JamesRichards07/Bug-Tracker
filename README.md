@@ -51,3 +51,18 @@ use \c <database name> or \connect <databse name>
 
 # Use mysql manual (make sure the version is correct).
 https://dev.mysql.com/doc/refman/8.0/en/creating-tables.html
+
+# Errors to handle
+1. Patch allows any info to be updated. Maybe only used for managers?
+2. When a user is deleted any bugs attached must also be deleted.
+3. Create new user with existing email. Should show "Email already in use."
+4. When new bug is created the user submitting the bug should have the Bug.id listed in thier bugs_submitted column.
+5. Patch crashes api when user.id or bug.id is not provided.
+
+# Questions for Micahel
+Why use a repository?
+Repo has branches. It contains code.
+Can work on the same project at the same time.
+
+foundation is the git repo.
+github, gitlab, bitbucket add features to git for consumers.

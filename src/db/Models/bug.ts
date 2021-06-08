@@ -1,12 +1,18 @@
 //require ('reflect-metadata');
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, BaseEntity, JoinColumn } from "typeorm";
+export enum BugStatus {
+    CREATED = "Created", 
+    UNDER_DEVELOPMENT = "Under_Development", 
+    IN_REVIEW = "In_Review",
+    COMPLETED = "Completed"
+};
 import {user} from "./user"
 
 @Entity({name: "bug"})
 export class bug extends BaseEntity{
 
     @PrimaryGeneratedColumn("uuid")
-    id: number;
+    id: string;
 
     @CreateDateColumn()
     createdOn: Date;
@@ -17,19 +23,24 @@ export class bug extends BaseEntity{
     @Column("varchar", {length: 255})
     description: string;
 
-    // @ManyToOne(
-    //     () => user, 
-    //     (subUser) => subUser.submitter
-    // )
-    // @JoinColumn({name: "SubmitterUserID"})
-    // subUser: user;
+    @Column("varchar", {length: 255})
+    submitter: string;
 
-    // @ManyToOne(
-    //     () => user, 
-    //     (users) => users.processor
-    // )
-    // @JoinColumn({name: "ProcessorUserID"})
-    // user: user;
-    //processor: Users["id"];
-    // processor: string;
+    @ManyToOne(type => user, User => User.id)
+    @JoinColumn({name: "submitterUserID"})
+    submitterUserID: user;
+
+    @Column("varchar", {length: 255, nullable: true})
+    processor: string;
+
+    @ManyToOne(type => user, User => User.id)
+    @JoinColumn({name: "processorUserID"})
+    processorUserID: user;
+
+    @Column({
+        type: "enum",
+        enum: BugStatus,
+        default: BugStatus.CREATED
+    })
+    status: BugStatus;
 };

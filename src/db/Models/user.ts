@@ -8,7 +8,6 @@ export enum UserRole {
 import {bug} from "./bug";
 
 @Entity({name: "user"})
-@Unique(["email"])
 export class user extends BaseEntity{
     @PrimaryGeneratedColumn("uuid")
     id: number;
@@ -32,9 +31,15 @@ export class user extends BaseEntity{
     })
     position: UserRole;
 
-    // @OneToMany(() => bug, (bugs) => bugs.subUser)
-    // submitter: bug[];
+    @Column("varchar", {length: 255, nullable: true})
+    bugs_submitted: string[];
 
-    // @OneToMany(() => bug, (bugs) => bugs.processor)
-    // processor: bug["id"];
+    @OneToMany(type => bug,  bug => bug.id)
+    bugsIdSubmitted: bug[];
+
+    @Column("varchar", {length: 255, nullable: true})
+    bugs_processor: string[];
+
+    @OneToMany(type => bug, bugs => bugs.id)
+    bugsIdProcessor: bug[];
 }

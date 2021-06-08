@@ -1,14 +1,20 @@
 //export{}
 const express = require("express");
 const router = express.Router();
-const UserController = require("../Controllers/user")
+const UserController = require("../Controllers/user");
+const UserLoginController = require("../Controllers/user_login");
+const checkAuth = import('../Middleware/checkAuth');
 
-router.post("/", UserController.user_create_new);
+router.post("/signup", UserLoginController.new_user_signup);
 
-router.get("/", UserController.user_get_all);
+router.post("/login", UserLoginController.user_login);
 
-router.get("/:id", UserController.user_get_user);
+router.get("/", checkAuth, UserController.user_get_all);
 
-router.delete("/:id", UserController.delete_user);
+router.get("/:id", checkAuth, UserController.user_get_user);
+
+router.patch("/:id", checkAuth, UserController.user_update_user);
+
+router.delete("/:id", checkAuth, UserController.delete_user);
 
 module.exports = router;
