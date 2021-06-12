@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const BugController = require("../Controllers/bug");
 const multer = require('multer');
-const checkAuth = import('../Middleware/checkAuth');
+const checkAuth = require('../Middleware/checkAuth');
 // const upload = multer({dest: 'uploads/'})
 
 const fileFilter = function(req, file, cb){
@@ -18,10 +18,10 @@ const fileFilter = function(req, file, cb){
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, './uploads/');
+        cb(null, './public/images/');
     },
     filename: function(req, file, cb){
-        cb(null, new Date().toISOString() + file.originalname);
+        cb(null, Date.now() + file.originalname);
     }
 });
 
@@ -33,11 +33,12 @@ const upload = multer({
     fileFilter: fileFilter
 });
 
-router.get("/", BugController.bug_get_all);
+router.get("/", checkAuth, BugController.bug_get_all);
 
-router.get("/:id", BugController.bug_get_bug);
+router.get("/:id", checkAuth, BugController.bug_get_bug);
 
 router.post("/", checkAuth, upload.single("bugImage"), BugController.bug_create_new);
+//router.post("/", checkAuth, BugController.bug_create_new);
 
 router.patch("/:id", checkAuth, BugController.bug_update_bug);
 

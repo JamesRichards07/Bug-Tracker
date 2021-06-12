@@ -8,12 +8,14 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - api-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
   api:
     build: .
     ports: 
       - 3000:3000
     volumes:
-      - api-data
+      - api-data:/app/public/images/
+
 volumes:
-  api-data:
+  db-data:
+  api-data: 

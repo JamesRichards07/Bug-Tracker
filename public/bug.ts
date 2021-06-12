@@ -1,19 +1,19 @@
 import { NextFunction, Request, Response} from "express"
-import { fromPairs, update } from "lodash";
+import { update } from "lodash";
 import {bug} from "../Models/bug";
 import {user} from "../Models/user";
-const bugImage = require("../Middleware/multer");
 interface MulterRequest extends Request {file: any};
 
 exports.bug_create_new = async (req: MulterRequest, res: Response, next: NextFunction) => {
     
-    const filename: string = req.file.originalname;
-
     console.log(req.file);
 
     const { application } = req.body;
     const { description } = req.body;
     const { submitterUserID } = req.body;
+    const { images } = req.file;
+    //"/Users/jamesrichards/Desktop/Projects/Bug-Tracker/uploads/";
+    const { imagesURL } = req.body;
     let { submitter } = {submitter: "Rick James"}
 
     const User = await user.findOne(submitterUserID);
@@ -27,8 +27,8 @@ exports.bug_create_new = async (req: MulterRequest, res: Response, next: NextFun
     Bug.description = description;
     Bug.submitterUserID = submitterUserID;
     Bug.submitter = submitter;
-    Bug.imageURL = "/images/" + filename;
-    Bug.imagePath = "/public/images" + filename;
+    Bug.images = images;
+    Bug.imagesURL = imagesURL;
 
     await Bug.save()
     .then(result => {
@@ -41,6 +41,21 @@ exports.bug_create_new = async (req: MulterRequest, res: Response, next: NextFun
             error: err
         });
     });
+
+    // console.log("Bug.id = " + Bug.id);
+    // console.log("User?.bugs_submitted = " + User?.bugs_submitted);
+
+    // const bugId: object = {Bug.id};
+
+    // const BugId: string[] = bugId.map(function(arr){
+    //     return arr.slice();
+    // })
+
+    // User?.bugs_submitted.push(Bug.id);
+
+    // await User?.save();
+        
+    // return res.status(201).json(Bug);
 };
 
 exports.bug_get_all = async (req: Request, res: Response) => {

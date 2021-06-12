@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const UserController = require("../Controllers/user");
 const UserLoginController = require("../Controllers/user_login");
-const checkAuth = import('../Middleware/checkAuth');
+const checkAuth = require('../Middleware/checkAuth');
 
 router.post("/signup", UserLoginController.new_user_signup);
 

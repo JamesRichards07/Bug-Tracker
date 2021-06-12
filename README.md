@@ -66,3 +66,7 @@ Can work on the same project at the same time.
 
 foundation is the git repo.
 github, gitlab, bitbucket add features to git for consumers.
+
+
+
+3 things - create path to postgress, add url image column, and create public folder. 

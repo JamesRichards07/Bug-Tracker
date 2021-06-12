@@ -10,10 +10,11 @@ const bugRoutes = require("./Routes/bugs");
 const userRoutes = require("./Routes/users");
 const user_loginRoutes = require("./Routes/user_login");
 
-app.use('/uploads', express.static('uplaods'));
+app.use('/static', express.static('/public'));
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+
 
 app.use("/bugs", bugRoutes);
 app.use("/users", userRoutes);

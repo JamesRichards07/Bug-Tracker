@@ -3,6 +3,7 @@ export interface IGetUserAuthInfoRequest extends Request {
     userData: string
   }
 require("dotenv").config();
+
 const jwt = require("jsonwebtoken");
 
 module.exports = (req: IGetUserAuthInfoRequest,  res: Response, next: NextFunction) => {

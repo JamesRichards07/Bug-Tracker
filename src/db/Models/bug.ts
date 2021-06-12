@@ -23,6 +23,12 @@ export class bug extends BaseEntity{
     @Column("varchar", {length: 255})
     description: string;
 
+    @Column("varchar", {nullable: true})
+    imagePath: string;
+
+    @Column({nullable: true})
+    imageURL: string;
+
     @Column("varchar", {length: 255})
     submitter: string;
 

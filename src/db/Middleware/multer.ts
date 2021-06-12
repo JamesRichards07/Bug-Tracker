@@ -1,21 +1,22 @@
+export{};
 const multer = require("multer");
 
 const fileFilter = function(req, file, cb){
 
     if(file.mimetype === 'image/jpeg' || 'image/png'){
-    cb(null, true);
+        cb(null, true);
     }
     else{
-    cb(null, false);
+        cb(null, false);
     }
 };
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, './uploads/')
+        cb(null, './public/images/')
     },
     filename: function(req, file, cb){
-        cb(null, new Date().toISOString() + file.originalname);
+        cb(null, Date.now() + file.originalname);
     }
 });
 
@@ -26,3 +27,7 @@ const upload = multer({
     },
     fileFilter: fileFilter
 });
+
+exports.bugImage = upload.single("bugImage");
+
+
