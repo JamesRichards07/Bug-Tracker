@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { getRepository } from "typeorm";
 import {user_login} from "../Models/user_login";
 import {user} from "../Models/user";
 import jwt = require("jsonwebtoken");
@@ -58,6 +59,7 @@ exports.user_login = async function(req: Request, res: Response, next: NextFunct
     
     user_login.find({email: req.body.email})
         .then(user => {
+            console.log(user);
             if(user.length < 1){
                 return res.status(401).json({
                     message: "Auth failed"
@@ -65,6 +67,7 @@ exports.user_login = async function(req: Request, res: Response, next: NextFunct
             };
 
             bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+                console.log(user[0].email);
                 if (err){
                     return res.status(401).json({
                         message: "Auth failed"
@@ -113,7 +116,7 @@ exports.user_login_get_user_login = async function(req: Request, res: Response, 
         console.log("from database", doc);
         if(doc){
             res.status(200).json({
-                user: doc
+                user_login: doc
             });
         }
         else{

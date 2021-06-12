@@ -9,10 +9,10 @@ router.post("/signup", UserLoginController.new_user_signup);
 
 router.post("/login", UserLoginController.user_login);
 
-router.get("/", checkAuth, UserLoginController.user_login_get_all);
+router.get("/", checkAuth.managerAuth, UserLoginController.user_login_get_all);
 
-router.get("/:id", checkAuth, UserLoginController.user_login_get_user_login);
+router.get("/:id", checkAuth.managerAuth, UserLoginController.user_login_get_user_login);
 
-router.delete("/:id", checkAuth, UserLoginController.delete_user_login);
+router.delete("/:id", checkAuth.managerAuth, UserLoginController.delete_user_login);
 
 module.exports = router;

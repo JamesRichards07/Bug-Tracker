@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response} from "express"
-import { fromPairs, update } from "lodash";
+import { NextFunction, Request, Response} from "express";
+import { getRepository } from "typeorm";
 import {bug} from "../Models/bug";
 import {user} from "../Models/user";
 const bugImage = require("../Middleware/multer");
@@ -28,7 +28,7 @@ exports.bug_create_new = async (req: MulterRequest, res: Response, next: NextFun
     Bug.submitterUserID = submitterUserID;
     Bug.submitter = submitter;
     Bug.imageURL = "/images/" + filename;
-    Bug.imagePath = "/public/images" + filename;
+    Bug.imagePath = "/public/images/" + filename;
 
     await Bug.save()
     .then(result => {
@@ -57,7 +57,7 @@ exports.bug_get_bug = async (req: Request, res: Response) => {
         console.log("from database", doc);
         if(doc){
             res.status(200).json({
-                user: doc
+                bug: doc
             });
         }
         else{
@@ -73,32 +73,24 @@ exports.bug_get_bug = async (req: Request, res: Response) => {
 };
 
 exports.bug_update_bug = async (req: Request, res: Response) => {
-    const {id} = req.params;
-    const Bug = await bug.findOne(id);
 
-    await bug.findOne(id)
-    .then(doc => {
-        console.log("from database", doc);
-        if(doc){
-            res.status(200).json({
-                user: doc
-            });
-        }
-        else{
-            res.status(404).json({message: "No valid entry for provided ID "})
-        };
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json({
-            error: err
+    let Bug: any = {};
+    
+    try{
+        Bug = await getRepository(bug)
+        .createQueryBuilder("Bug")
+        .where("Bug.id = :id", req.params)
+        .getOne();
+    }
+    catch{
+        return res.status(404).json({
+            message: "No valid entry for provided ID "
         });
-    });
+    }
 
     for(let ops in req.body){
         if(Bug?.hasOwnProperty(ops)){
             Bug[ops] = req.body[ops];
-            await Bug.save();
         }
     };
 

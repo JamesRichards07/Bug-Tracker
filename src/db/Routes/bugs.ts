@@ -33,15 +33,15 @@ const upload = multer({
     fileFilter: fileFilter
 });
 
-router.get("/", checkAuth, BugController.bug_get_all);
+router.get("/", BugController.bug_get_all);
 
-router.get("/:id", checkAuth, BugController.bug_get_bug);
+router.get("/:id", checkAuth.devAuth, BugController.bug_get_bug);
 
-router.post("/", checkAuth, upload.single("bugImage"), BugController.bug_create_new);
+router.post("/", checkAuth.devAuth, upload.single("bugImage"), BugController.bug_create_new);
 //router.post("/", checkAuth, BugController.bug_create_new);
 
-router.patch("/:id", checkAuth, BugController.bug_update_bug);
+router.patch("/:id", checkAuth.supAuth, BugController.bug_update_bug);
 
-router.delete("/:id", checkAuth, BugController.delete_bug);
+router.delete("/:id", checkAuth.managerAuth, BugController.delete_bug);
 
 module.exports = router;
