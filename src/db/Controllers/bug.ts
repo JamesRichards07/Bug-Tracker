@@ -27,7 +27,7 @@ exports.bug_create_new = async (req: MulterRequest, res: Response, next: NextFun
     Bug.description = description;
     Bug.submitterUserID = submitterUserID;
     Bug.submitter = submitter;
-    Bug.imageURL = "/images/" + filename;
+    Bug.imageURL = "/static/images/" + filename;
     Bug.imagePath = "/public/images/" + filename;
 
     await Bug.save()
@@ -109,6 +109,19 @@ exports.bug_update_bug = async (req: Request, res: Response) => {
 
 exports.delete_bug = async (req: Request, res: Response) => {
     const { id } = req.params;
+    let Bug: any = {};
+
+    try{
+        Bug = await getRepository(bug)
+        .createQueryBuilder("Bug")
+        .where("Bug.id = :id", req.params)
+        .getOne();
+    }
+    catch{
+        return res.status(404).json({
+            message: "No valid entry for provided ID "
+        });
+    }
 
     await bug.delete(id)
     .then(result => {
@@ -128,3 +141,23 @@ exports.delete_bug = async (req: Request, res: Response) => {
         });
     });
 };
+
+exports.delete_image = async (req: Request, res: Response, next: NextFunction) => {
+    let Bug: any = {};
+    
+    try{
+        Bug = await getRepository(bug)
+        .createQueryBuilder("Bug")
+        .where("Bug.id = :id", req.params)
+        .getOne();
+    }
+    catch{
+        return res.status(404).json({
+            message: "No valid entry for provided ID "
+        });
+    }
+
+    await bug.delete(Bug.imagePath);
+
+    next();
+}

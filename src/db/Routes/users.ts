@@ -9,9 +9,9 @@ router.post("/signup", UserLoginController.new_user_signup);
 
 router.post("/login", UserLoginController.user_login);
 
-router.get("/", checkAuth.devAuth, UserController.user_get_all);
+router.get("/", checkAuth.genAuth, UserController.user_get_all);
 
-router.get("/:id", checkAuth.devAuth, UserController.user_get_user);
+router.get("/:id", checkAuth.genAuth, UserController.user_get_user);
 
 router.patch("/:id", checkAuth.managerAuth, UserController.user_update_user);
 
