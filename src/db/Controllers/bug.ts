@@ -2,14 +2,17 @@ import { NextFunction, Request, Response} from "express";
 import { getRepository } from "typeorm";
 import {bug} from "../Models/bug";
 import {user} from "../Models/user";
-const bugImage = require("../Middleware/multer");
+const dateNow = require("../Middleware/multer");
 interface MulterRequest extends Request {file: any};
 
 exports.bug_create_new = async (req: MulterRequest, res: Response, next: NextFunction) => {
     
-    const filename: string = req.file.originalname;
+    console.log(req.file.path);
 
-    console.log(req.file);
+    const filename: string = req.file.path.split("/")[2];
+
+    //let dateNow: number = Date.now();
+    //console.log("filename: " + JSON.stringify(filename));
 
     const { application } = req.body;
     const { description } = req.body;
@@ -27,8 +30,8 @@ exports.bug_create_new = async (req: MulterRequest, res: Response, next: NextFun
     Bug.description = description;
     Bug.submitterUserID = submitterUserID;
     Bug.submitter = submitter;
-    Bug.imageURL = "/static/images/" + filename;
-    Bug.imagePath = "/public/images/" + filename;
+    Bug.imageURL = "localhost:3000/static/images/" + filename;
+    Bug.imagePath = req.file.path;
 
     await Bug.save()
     .then(result => {
@@ -43,7 +46,7 @@ exports.bug_create_new = async (req: MulterRequest, res: Response, next: NextFun
     });
 };
 
-exports.bug_get_all = async (req: Request, res: Response) => {
+exports.bug_get_all = async (req: Request, res: Response, next: NextFunction) => {
     const Bug = await bug.find();
 
     return res.json(Bug);
@@ -144,6 +147,7 @@ exports.delete_bug = async (req: Request, res: Response) => {
 
 exports.delete_image = async (req: Request, res: Response, next: NextFunction) => {
     let Bug: any = {};
+    const fs = require("fs");
     
     try{
         Bug = await getRepository(bug)
@@ -157,7 +161,15 @@ exports.delete_image = async (req: Request, res: Response, next: NextFunction) =
         });
     }
 
-    await bug.delete(Bug.imagePath);
+    console.log("image Path: " + Bug.imagePath);
+    console.log("image type: " + typeof Bug.imagePath)
+
+    fs.unlink(Bug.imagePath, (err) => {
+        if(err) {
+            throw err;
+        }
+        console.log("File is deleted.")
+    });
 
     next();
 }

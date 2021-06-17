@@ -67,7 +67,6 @@ exports.user_login = async function(req: Request, res: Response, next: NextFunct
             };
 
             bcrypt.compare(req.body.password, user[0].password, (err, result) => {
-                console.log(user[0].email);
                 if (err){
                     return res.status(401).json({
                         message: "Auth failed"

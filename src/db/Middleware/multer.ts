@@ -1,5 +1,5 @@
 export{};
-const multer = require("multer");
+const multer = require('multer');
 
 const fileFilter = function(req, file, cb){
 
@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + file.originalname);
     }
 });
-
+        
 const upload = multer({
     storage: storage, 
     limits:{
@@ -28,6 +28,4 @@ const upload = multer({
     fileFilter: fileFilter
 });
 
-exports.bugImage = upload.single("bugImage");
-
-
+exports.upload = upload.single("bugImage");

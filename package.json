@@ -5,7 +5,7 @@
     "main": "server.js",
     "type": "module",
     "scripts": {
-        "build": "rimraf public && cp -R src/db/Controllers ./public",
+        "build": "rimraf public && mkdir public",
         "watch": "tsc --watch",
         "dev": "nodemon --watch src -e ts --exec ts-node -r ./ormconfig.json ./src/server.ts",
         "start": "ts-node-dev src/server.ts"

@@ -48,27 +48,6 @@ exports.user_update_user = async function(req: Request, res: Response){
         });
     }
 
-    // await user.findOne(id)
-    // .then(doc => {
-    //     console.log("from database", doc);
-    //     if(doc){
-    //         res.status(200).json({
-    //             user: doc
-    //         });
-    //     }
-    //     else{
-    //         res.status(404).json({message: "No valid entry for provided ID "})
-    //     };
-    // })
-    // .catch(err => {
-    //     console.log(err)
-    //     res.status(500).json({
-    //         error: err
-    //     });
-    // });
-
-    // const User = await user.findOne(id);
-
     for(const ops in req.body){
         if(User?.hasOwnProperty(ops)){
             User[ops] = req.body[ops];
