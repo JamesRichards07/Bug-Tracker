@@ -20,10 +20,6 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept, Autorization, imageURL, email");
 
-  // if(req.Method === "OPTIONS"){
-  //     res.header("Access-Allow-Control-Methods", "Get, Post, Put, Patch, Delete");
-  //     return res.status(200).json({})
-  // }
   next();
 })
 

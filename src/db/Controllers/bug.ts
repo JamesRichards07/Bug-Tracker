@@ -6,30 +6,34 @@ const dateNow = require("../Middleware/multer");
 interface MulterRequest extends Request {file: any};
 
 exports.bug_create_new = async (req: MulterRequest, res: Response, next: NextFunction) => {
-    
-    console.log(req.file.path);
 
     const filename: string = req.file.path.split("/")[2];
 
-    //let dateNow: number = Date.now();
-    //console.log("filename: " + JSON.stringify(filename));
-
     const { application } = req.body;
     const { description } = req.body;
-    const { submitterUserID } = req.body;
-    let { submitter } = {submitter: "Rick James"}
-
-    const User = await user.findOne(submitterUserID);
+    const email = req.headers.email;
     const Bug = new bug();
 
-    if(User?.firstName && User?.lastName){
-        submitter = User.firstName + " " + User.lastName + " userId:" + User.id;
+    const User = await getRepository(user)
+    .createQueryBuilder("User")
+    .where("User.email = :email", {email: email})
+    .getOne();
+
+    const {submitter} = {submitter: "User id:" + User?.id};
+
+    try{
+        User;
+    }
+    catch{
+        return res.status(404).json({
+            message: "No valid entry provided."
+        });
     }
 
     Bug.application = application;
     Bug.description = description;
-    Bug.submitterUserID = submitterUserID;
-    Bug.submitter = submitter;
+    Bug.submitter = submitter.split(":")[1];
+    
     Bug.imageURL = "localhost:3000/static/images/" + filename;
     Bug.imagePath = req.file.path;
 
@@ -37,9 +41,9 @@ exports.bug_create_new = async (req: MulterRequest, res: Response, next: NextFun
     .then(result => {
         console.log(result);
         res.status(201).json(Bug);
-    })
+        })
     .catch(err => {
-        console.log(err);
+        console.log(err)
         res.status(500).json({
             error: err
         });
@@ -77,13 +81,13 @@ exports.bug_get_bug = async (req: Request, res: Response) => {
 
 exports.bug_update_bug = async (req: Request, res: Response) => {
 
-    let Bug: any = {};
-    
-    try{
-        Bug = await getRepository(bug)
+    const Bug = await getRepository(bug)
         .createQueryBuilder("Bug")
         .where("Bug.id = :id", req.params)
         .getOne();
+    
+    try{
+        Bug;
     }
     catch{
         return res.status(404).json({
@@ -112,13 +116,13 @@ exports.bug_update_bug = async (req: Request, res: Response) => {
 
 exports.delete_bug = async (req: Request, res: Response) => {
     const { id } = req.params;
-    let Bug: any = {};
-
-    try{
-        Bug = await getRepository(bug)
+    const Bug = await getRepository(bug)
         .createQueryBuilder("Bug")
         .where("Bug.id = :id", req.params)
         .getOne();
+
+    try{
+        Bug;
     }
     catch{
         return res.status(404).json({
@@ -146,14 +150,14 @@ exports.delete_bug = async (req: Request, res: Response) => {
 };
 
 exports.delete_image = async (req: Request, res: Response, next: NextFunction) => {
-    let Bug: any = {};
-    const fs = require("fs");
-    
-    try{
-        Bug = await getRepository(bug)
+    const Bug = await getRepository(bug)
         .createQueryBuilder("Bug")
         .where("Bug.id = :id", req.params)
         .getOne();
+    const fs = require("fs");
+    
+    try{
+        Bug;
     }
     catch{
         return res.status(404).json({
@@ -161,10 +165,10 @@ exports.delete_image = async (req: Request, res: Response, next: NextFunction) =
         });
     }
 
-    console.log("image Path: " + Bug.imagePath);
-    console.log("image type: " + typeof Bug.imagePath)
+    console.log("image Path: " + Bug?.imagePath);
+    console.log("image type: " + typeof Bug?.imagePath)
 
-    fs.unlink(Bug.imagePath, (err) => {
+    fs.unlink(Bug?.imagePath, (err) => {
         if(err) {
             throw err;
         }

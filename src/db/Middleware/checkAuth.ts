@@ -10,20 +10,20 @@ require("dotenv").config();
 
 const jwt = require("jsonwebtoken");
 
-// exports.genAuth = (req: IGetUserAuthInfoRequest,  res: Response, next: NextFunction) => {
-//     try{
-//         const token = req.headers.authorization?.split(" ")[1];
-//         const decoded = jwt.verify(token, process.env.JWT_KEY);
-//         req.userData = decoded;
+exports.genAuth = (req: IGetUserAuthInfoRequest,  res: Response, next: NextFunction) => {
+    try{
+        const token = req.headers.authorization?.split(" ")[1];
+        const decoded = jwt.verify(token, process.env.JWT_KEY);
+        req.userData = decoded;
 
-//         next();
+        next();
 
-//     } catch (error) {
-//         return res.status(401).json({
-//             message: "Auth failed"
-//         });
-//     }
-// }
+    } catch (error) {
+        return res.status(401).json({
+            message: "Auth failed"
+        });
+    }
+}
 
 exports.devAuth = async (req: IGetUserAuthInfoRequest,  res: Response, next: NextFunction) => {
     try{
@@ -36,29 +36,40 @@ exports.devAuth = async (req: IGetUserAuthInfoRequest,  res: Response, next: Nex
         .where("User.email = :email", {email: req.headers.email})
         .getOne();
 
-        console.log("User id: " + User?.id);
+        //console.log("User id: " + User?.id);
 
         const Bug = await getRepository(bug)
         .createQueryBuilder("Bug")
         .where("Bug.id = :id", {id: req.params.id})
         .getOne();
 
-        const bugSubmitterUserId = Bug?.submitter.split(":")[1]; 
-        const bugProcessorUserId = Bug?.processor.split(":")[1];
+        console.log("Bug processor: " + Bug?.processor);
 
-        console.log("Bug: " + JSON.stringify(Bug));
-        console.log("Bug submitterUserID: " + bugSubmitterUserId);
-        console.log(User?.id === bugSubmitterUserId);
+        if(Bug?.status === "Created"){
+            const bugSubmitterUserId: string = Bug?.submitter;
 
-        if((User?.id === bugSubmitterUserId && Bug?.status === "Created") || User?.id === bugProcessorUserId || User?.position === "manager" || User?.position === "supervisor"){
-            next();
+            if(User?.id === bugSubmitterUserId || User?.position === "manager" || User?.position === "supervisor"){
+                next();
+            }
+            else{
+                return res.status(401).json({
+                    message: "Auth failed"
+                });
+            }
         }
         else{
-            return res.status(401).json({
-                message: "Auth failed"
-            });
-        } 
+            const bugProcessorUserId = Bug?.processor;
 
+            if(User?.id === bugProcessorUserId || User?.position === "manager" || User?.position === "supervisor"){
+                next();
+            }
+            else{
+                return res.status(401).json({
+                    message: "Auth failed"
+                });
+            }
+        }
+        
     } catch (error) {
         return res.status(401).json({
             message: "Auth failed"

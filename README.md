@@ -57,6 +57,9 @@ https://dev.mysql.com/doc/refman/8.0/en/creating-tables.html
 2. When a user is deleted any bugs attached must also be deleted.
 4. When new bug is created the user submitting the bug should have the Bug.id listed in thier bugs_submitted column.
 5. Patch crashes api when user.id or bug.id is not provided.
+6. Check on if a user can submit multple bugs
+7. Add bugId to user when new bug is added or assigned as processor
+8. User successfully deleted when id doesn't match anything?
 
 # Questions for Micahel
 Why use a repository?

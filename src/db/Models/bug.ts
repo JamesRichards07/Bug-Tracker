@@ -32,16 +32,16 @@ export class bug extends BaseEntity{
     @Column("varchar", {length: 255})
     submitter: string;
 
-    @ManyToOne(type => user, User => User.id)
-    @JoinColumn({name: "submitterUserID"})
-    submitterUserID: user;
+    // @ManyToOne(type => user, User => User.Bug)
+    // @JoinColumn({name: "submitterUserID"})
+    // submitterUserID: [];
 
     @Column("varchar", {length: 255, nullable: true})
     processor: string;
 
-    @ManyToOne(type => user, User => User.id)
-    @JoinColumn({name: "processorUserID"})
-    processorUserID: user;
+    // @ManyToOne(type => user, User => User.Bug)
+    // @JoinColumn({name: "processorUserID"})
+    // processorUserID: [];
 
     @Column({
         type: "enum",

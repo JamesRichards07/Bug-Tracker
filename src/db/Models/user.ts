@@ -10,7 +10,7 @@ import {bug} from "./bug";
 @Entity({name: "user"})
 export class user extends BaseEntity{
     @PrimaryGeneratedColumn("uuid")
-    id: number;
+    id: string;
 
     @Column("varchar", {length: 15})
     firstName: string;
@@ -31,15 +31,15 @@ export class user extends BaseEntity{
     })
     position: UserRole;
 
-    @Column("varchar", {length: 255, nullable: true})
-    bugs_submitted: string[];
+    // @Column("varchar", {length: 255, nullable: true})
+    // bugs_submitted: [];
 
-    @OneToMany(type => bug,  bug => bug.id)
-    bugsIdSubmitted: bug[];
+    // @OneToMany(type => bug,  Bug => Bug.User)
+    // bugsIdSubmitted: bug[];
 
-    @Column("varchar", {length: 255, nullable: true})
-    bugs_processor: string[];
+    // @Column("varchar", {length: 255, nullable: true})
+    // bugs_processor: [];
 
-    @OneToMany(type => bug, bugs => bugs.id)
-    bugsIdProcessor: bug[];
+    // @OneToMany(type => bug, Bug => Bug.User)
+    // bugsIdProcessor: bug[];
 }

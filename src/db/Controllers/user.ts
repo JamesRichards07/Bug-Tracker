@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response} from "express";
-import { getRepository } from "typeorm";
+import { getConnection, getRepository } from "typeorm";
 import {user} from "../Models/user";
+import {bug} from "../Models/bug";
+interface MulterRequest extends Request {file: any};
 const checkAuth = import('../Middleware/checkAuth');
 
 exports.user_get_all = async function(req: Request, res: Response){
