@@ -6,7 +6,8 @@ const dateNow = require("../Middleware/multer");
 interface MulterRequest extends Request {file: any};
 
 exports.bug_create_new = async (req: MulterRequest, res: Response, next: NextFunction) => {
-
+    console.log(req.file);
+    
     const filename: string = req.file.path.split("/")[2];
 
     const { application } = req.body;

@@ -4,6 +4,7 @@ import {user_login} from "../Models/user_login";
 import {user} from "../Models/user";
 import jwt = require("jsonwebtoken");
 import { result } from "lodash";
+
 const bcrypt = require("bcrypt");
 
 exports.new_user_signup = async function(req: Request, res: Response, NextFunction){
@@ -29,7 +30,6 @@ exports.new_user_signup = async function(req: Request, res: Response, NextFuncti
                         User.lastName = req.body.lastName;
                         User.email = req.body.email;
                         User.team = req.body.team;
-                        User.position = req.body.position;
 
                         User_Login.email = req.body.email;
                         User_Login.user = User;
@@ -130,10 +130,53 @@ exports.user_login_get_user_login = async function(req: Request, res: Response, 
     });
 };
 
-exports.delete_user_login = async function(req: Request, res: Response, next: NextFunction){
+exports.user_login_update_user_login =async function(req: Request, res: Response, next: NextFunction){
     const { id } = req.params;
 
-    await user_login.delete(id)
+    const User_Login = await getRepository(user_login)
+    .createQueryBuilder("User_Login")
+    .where("User_Login.id = :id", req.params)
+    .getOne();
+
+    try{
+        User_Login;
+    }
+    catch{
+        return res.status(404).json({
+            message: "No valid entry for provided ID "
+        });
+    }
+
+    for(const ops in req.body){
+        if(User_Login?.hasOwnProperty(ops)){
+            User_Login[ops] = req.body[ops];
+        }
+    };
+
+    await User_Login?.save()
+    .then(result => {
+        console.log(result);
+        res.status(201).json(User_Login);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+
+    next();
+};
+
+exports.delete_user_login = async function(req: Request, res: Response, next: NextFunction){
+    const { email } = req.body.email;
+    
+    // const User_Login = await getRepository(user_login)
+    // .createQueryBuilder("User")
+    // .where("User.email = :email", {email: email})
+    // .getOne();
+
+    await user_login.delete(email)
     .then(result => {
         res.status(200).json({
             message: "User successfully deleted.",

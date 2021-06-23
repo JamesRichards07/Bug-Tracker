@@ -36,8 +36,6 @@ exports.devAuth = async (req: IGetUserAuthInfoRequest,  res: Response, next: Nex
         .where("User.email = :email", {email: req.headers.email})
         .getOne();
 
-        //console.log("User id: " + User?.id);
-
         const Bug = await getRepository(bug)
         .createQueryBuilder("Bug")
         .where("Bug.id = :id", {id: req.params.id})
@@ -71,33 +69,6 @@ exports.devAuth = async (req: IGetUserAuthInfoRequest,  res: Response, next: Nex
         }
         
     } catch (error) {
-        return res.status(401).json({
-            message: "Auth failed"
-        });
-    }
-};
-
-exports.supAuth = async (req: IGetUserAuthInfoRequest,  res: Response, next: NextFunction) => {
-    try{
-        const token = req.headers.authorization?.split(" ")[1];
-        const decoded = jwt.verify(token, process.env.JWT_KEY);
-        req.userData = decoded;
-
-        const User = await getRepository(user)
-        .createQueryBuilder("User")
-        .where("User.email = :email", {email: req.headers.email})
-        .getOne();
-
-        if(User?.position === "supervisor" || User?.position === "manager"){
-            next();
-        }
-        else{
-            return res.status(401).json({
-                message: "Auth failed"
-            });
-        }    
-    } 
-    catch (error) {
         return res.status(401).json({
             message: "Auth failed"
         });
