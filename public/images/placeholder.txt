@@ -1,0 +1,1 @@
+Created so git will accept the images folder.
