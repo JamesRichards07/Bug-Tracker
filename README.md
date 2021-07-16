@@ -14,13 +14,14 @@ This Restful SQL API was built out of my aspiration to continually challenge mys
 ## Only the back-end of this project has been posted. Please see below on how to use this project until the front end is completed.
 
 ### Getting Started
-1. Add a .env file to access the postgres database and creation of a JWT:
-    db_pw = db-password-goes-here
-    JWT_KEY = private-key-goes-here
-2. Start up docker using "docker compose up"
-3. http://localhost:3000 used to access site.
-4. Use Postman or other Restful API test programs
-5. On start there is one user with "manager" access:
+1. Run `npm install`. This will install the dependencies needed to run the Bug Tracker.
+2. Add a .env file to the root diretory to access the postgres database and creation of a JWT:
+    `db_pw = db-password-goes-here`
+    `JWT_KEY = private-key-goes-here`
+3. Start up docker using `docker compose up`
+4. http://localhost:3000 used to access site.
+5. Use Postman or other Restful API test programs
+6. On start there is one user with "manager" access:
     email: test@gmail.com
     password: 123456
 
