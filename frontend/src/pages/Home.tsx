@@ -1,16 +1,11 @@
-import userInfo from '../components/CheckAuth';
 const CheckAuth = require('../components/CheckAuth');
 
 function HomePage(){
-    
-    
-    
+    CheckAuth.CheckAuth();
+
     return(
-        CheckAuth.CheckAuth(userInfo.userIsloggedIn));
-        <section>
-            <h1>Home Page</h1>
-        </section>
-    )
+        <div>Home Page</div>
+    ); 
 }
 
 export default HomePage;

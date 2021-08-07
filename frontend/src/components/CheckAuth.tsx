@@ -1,26 +1,13 @@
-import { Switch, Route} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
+import userInfo from './users/UserItem';
 
-import WelcomePage from '../pages/Welcome';
-import LoginNavigation from './layout/LoginNavigation';
+export function CheckAuth(){
+   const history = useHistory();
 
-const userInfo = {
-   userIsloggedIn: false
+   if(!userInfo.userIsloggedIn){
+      history.replace("/");
+  }
+  else{
+     return;
+  }
 }
-
-exports.CheckAuth = (check: boolean) => {
-   if(!check){
-      return(
-         <div>
-            <Switch>
-            <Route path='/' exact>
-                <WelcomePage/>
-                <LoginNavigation/>
-            </Route>
-            </Switch>
-         </div>
-         
-      )
-   }
-}
-
-export default userInfo;

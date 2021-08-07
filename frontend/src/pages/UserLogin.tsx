@@ -2,7 +2,8 @@ import {useHistory} from 'react-router-dom';
 
 import WelcomePage from './Welcome';
 import UserLoginForm from '../components/users/UserLoginForm';
-import userInfo from '../components/CheckAuth';
+// import userInfo from '../components/CheckAuth';
+import userInfo from '../components/users/UserItem';
 
 function UserLoginPage(props:any){
     const history = useHistory();
@@ -20,7 +21,8 @@ function UserLoginPage(props:any){
         )
         .then(res => res.json())
         .then(data => {
-            // userHeaders.authorization = "Bearer " + data.token;
+            userInfo.email = loginData.email;
+            userInfo.authorization = "Bearer " + data.token;
             userInfo.userIsloggedIn = true;
             history.replace("/home")
         })
