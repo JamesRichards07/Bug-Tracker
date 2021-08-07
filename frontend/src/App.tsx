@@ -1,8 +1,8 @@
 import { Switch, Route} from 'react-router-dom';
 
 import HomePage from './pages/Home';
-import UsersPage from './pages/Users';
-import BugsPage from './pages/Bugs';
+import AllUsersPage from './pages/AllUsers';
+import BugsPage from './pages/AllBugs';
 import WelcomePage from './pages/Welcome';
 import UserLoginPage from './pages/UserLogin';
 import UserSignupPage from './pages/UserSignup';
@@ -28,7 +28,7 @@ function App(){
                 <HomePage/>
             </Route>
             <Route path='/users' exact>
-                <UsersPage/>
+                <AllUsersPage/>
             </Route>
             <Route path='/bugs' exact>
                 <BugsPage/>

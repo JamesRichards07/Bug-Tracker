@@ -1,5 +1,5 @@
 import {useHistory} from 'react-router-dom';
-import userInfo from './users/UserItem';
+import userInfo from './users/LoggedInUserInfo';
 
 export function CheckAuth(){
    const history = useHistory();

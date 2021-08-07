@@ -2,8 +2,7 @@ import {useHistory} from 'react-router-dom';
 
 import WelcomePage from './Welcome';
 import UserLoginForm from '../components/users/UserLoginForm';
-// import userInfo from '../components/CheckAuth';
-import userInfo from '../components/users/UserItem';
+import userInfo from '../components/users/LoggedInUserInfo';
 
 function UserLoginPage(props:any){
     const history = useHistory();
@@ -19,7 +18,7 @@ function UserLoginPage(props:any){
                 }
             }
         )
-        .then(res => res.json())
+        .then(response => response.json())
         .then(data => {
             userInfo.email = loginData.email;
             userInfo.authorization = "Bearer " + data.token;
