@@ -3,7 +3,8 @@ import UserItem from './UserItem';
 function UserList(props:any){
     return (
         <ul>
-            {props.users.forEach((user:any) => {
+            {props.users.map((user:any) => {
+                return (
                 <UserItem
                     key={user.id}
                     id={user.id}
@@ -13,6 +14,7 @@ function UserList(props:any){
                     team={user.team}
                     position={user.position}
                 />
+                )
             })}
         </ul>
     )

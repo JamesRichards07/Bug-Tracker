@@ -7,11 +7,11 @@ const CheckAuth = require('../components/CheckAuth');
 function AllUsersPage(){
     CheckAuth.CheckAuth();
     
-    //const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [loadedUsers, setLoadedUsers] = useState([]);
 
     useEffect(() => {
-        //setIsLoading(true);
+        setIsLoading(true);
         fetch(
             'http://localhost:8080/users',
             {
@@ -21,7 +21,11 @@ function AllUsersPage(){
                 }
             }
         )
-        .then((response) => response.json())
+        .then((response) => {
+            return(
+                response.json()
+            )
+        })
         .then((data) => {
             const users:any = [];
 
@@ -34,10 +38,18 @@ function AllUsersPage(){
                 users.push(user);
             };
 
+            setIsLoading(false);
             setLoadedUsers(users);
         });
     }, [])
 
+    if(isLoading){
+        return (
+            <section>
+                <p>Loading...</p>
+            </section>
+        )
+    };
 
     return(
         <section>
