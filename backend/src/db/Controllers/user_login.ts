@@ -3,7 +3,6 @@ import { getRepository } from "typeorm";
 import {user_login} from "../Models/user_login";
 import {user} from "../Models/user";
 import jwt = require("jsonwebtoken");
-import { result } from "lodash";
 
 const bcrypt = require("bcrypt");
 
@@ -170,11 +169,6 @@ exports.user_login_update_user_login =async function(req: Request, res: Response
 
 exports.delete_user_login = async function(req: Request, res: Response, next: NextFunction){
     const { email } = req.body.email;
-    
-    // const User_Login = await getRepository(user_login)
-    // .createQueryBuilder("User")
-    // .where("User.email = :email", {email: email})
-    // .getOne();
 
     await user_login.delete(email)
     .then(result => {
@@ -182,7 +176,7 @@ exports.delete_user_login = async function(req: Request, res: Response, next: Ne
             message: "User successfully deleted.",
             req: {
                 type: "Post",
-                url: 'http://localhost:3000/user/',
+                url: 'http://localhost:8080/user/',
                 body: { firstName: "String", lastName: "String", email: "String", team: "String", position: "String"}
             }
         });

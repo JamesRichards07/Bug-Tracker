@@ -1,3 +1,4 @@
+import { Console } from "console";
 import { NextFunction, Request, Response} from "express";
 import { getRepository } from "typeorm";
 import {bug} from "../Models/bug";
@@ -6,37 +7,33 @@ const dateNow = require("../Middleware/multer");
 interface MulterRequest extends Request {file: any};
 
 exports.bug_create_new = async (req: MulterRequest, res: Response, next: NextFunction) => {
-    console.log(req.file);
-    
-    const filename: string = req.file.path.split("/")[2];
 
-    const { application } = req.body;
-    const { description } = req.body;
     const email = req.headers.email;
-    const Bug = new bug();
 
     const User = await getRepository(user)
     .createQueryBuilder("User")
     .where("User.email = :email", {email: email})
     .getOne();
 
-    const {submitter} = {submitter: "User id:" + User?.id};
+    const Bug = new bug();
 
-    try{
-        User;
+    let filename: string = "";
+
+    if(User !== undefined && req.file !== undefined){
+        filename = req.file.path.split("/")[2];
+        Bug.imageURL = "localhost:8080/static/images/" + filename;
+        Bug.imagePath = req.file.path;
     }
-    catch{
-        return res.status(404).json({
-            message: "No valid entry provided."
-        });
+    else if(User !== undefined){
+
+    }
+    else{
+        return console.log("User not found.")
     }
 
-    Bug.application = application;
-    Bug.description = description;
-    Bug.submitter = submitter.split(":")[1];
-    
-    Bug.imageURL = "localhost:3000/static/images/" + filename;
-    Bug.imagePath = req.file.path;
+    Bug.application = req.body.application;
+    Bug.description = req.body.description;
+    Bug.submitter = User.id;
 
     await Bug.save()
     .then(result => {
@@ -115,8 +112,12 @@ exports.bug_update_bug = async (req: Request, res: Response) => {
     });
 };
 
+// Deletion is very insecure as it only checks the email address listed in the header. 
+// I would remedy this issue be including the email address in the JWT instead. 
+
 exports.delete_bug = async (req: Request, res: Response) => {
     const { id } = req.params;
+
     const Bug = await getRepository(bug)
         .createQueryBuilder("Bug")
         .where("Bug.id = :id", req.params)
@@ -137,7 +138,7 @@ exports.delete_bug = async (req: Request, res: Response) => {
         message: "Bug successfully deleted.",
             req: {
                 type: "Post",
-                url: 'http://localhost:3000/bugs/',
+                url: 'http://localhost:8080/bugs/',
                 body: { description: "String", application: "String"}
             }
         });
@@ -155,10 +156,12 @@ exports.delete_image = async (req: Request, res: Response, next: NextFunction) =
         .createQueryBuilder("Bug")
         .where("Bug.id = :id", req.params)
         .getOne();
+
     const fs = require("fs");
     
     try{
         Bug;
+        console.log("D");
     }
     catch{
         return res.status(404).json({
@@ -166,15 +169,14 @@ exports.delete_image = async (req: Request, res: Response, next: NextFunction) =
         });
     }
 
-    console.log("image Path: " + Bug?.imagePath);
-    console.log("image type: " + typeof Bug?.imagePath)
-
-    fs.unlink(Bug?.imagePath, (err) => {
-        if(err) {
-            throw err;
-        }
-        console.log("File is deleted.")
-    });
+    if(Bug?.imagePath !== null){
+        fs.unlink(Bug?.imagePath, (err) => {
+            if(err) {
+                throw err;
+            }
+            console.log("File is deleted.")
+        });
+    }
 
     next();
 }

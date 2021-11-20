@@ -6,7 +6,6 @@ export enum BugStatus {
     IN_REVIEW = "In_Review",
     COMPLETED = "Completed"
 };
-import {user} from "./user"
 
 @Entity({name: "bug"})
 export class bug extends BaseEntity{
@@ -32,16 +31,8 @@ export class bug extends BaseEntity{
     @Column("varchar", {length: 255})
     submitter: string;
 
-    // @ManyToOne(type => user, User => User.Bug)
-    // @JoinColumn({name: "submitterUserID"})
-    // submitterUserID: [];
-
     @Column("varchar", {length: 255, nullable: true})
     processor: string;
-
-    // @ManyToOne(type => user, User => User.Bug)
-    // @JoinColumn({name: "processorUserID"})
-    // processorUserID: [];
 
     @Column({
         type: "enum",

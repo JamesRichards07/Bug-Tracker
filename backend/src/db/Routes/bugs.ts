@@ -2,7 +2,7 @@ export{}
 const express = require("express");
 const router = express.Router();
 const BugController = require("../Controllers/bug");
-const UserController = require("../Controllers/user");
+
 const checkAuth = require('../Middleware/checkAuth');
 const images = require("../Middleware/multer");
 

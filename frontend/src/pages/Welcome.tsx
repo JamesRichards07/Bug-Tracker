@@ -1,22 +1,28 @@
+import {Link} from "react-router-dom";
+
 function WelcomePage(props: any){  
     return(    
-        <h1>
-            <div> Welcome Page </div>
+        <div className="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center px-2">
+            <h1 className="font-bold text-center text-lg pb-5"> Welcome to Tracker! </h1>
+        
+            <h2 className="pb-5 text-center">
+                Internal communication is paramount for a business, and this program strives to 
+            provide a usable tool to track bugs, issues or tasks which can then be assigned 
+            to designated team members to fix or complete. 
+            </h2>
+
+            <h3>Please 
+                <Link className="text-blue-600" to="/bugTracker/login"> Login </Link>
+                
+                or 
+                
+                <Link className='text-green-600' to="/bugTracker/signup"> Sign Up </Link>
+                
+                to get started.</h3>
             
-            Lorem ipsum dolor sit amet, 
-            consectetur adipiscing elit, 
-            sed do eiusmod tempor incididunt 
-            ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis 
-            nostrud exercitation ullamco laboris 
-            nisi ut aliquip ex ea commodo 
-            consequat. Duis aute irure dolor in 
-            reprehenderit in voluptate velit esse 
-            cillum dolore eu fugiat nulla pariatur. 
-            Excepteur sint occaecat cupidatat non 
-            proident, sunt in culpa qui officia 
-            deserunt mollit anim id est laborum.
-        </h1>
+
+
+        </div>
     );
 }
 

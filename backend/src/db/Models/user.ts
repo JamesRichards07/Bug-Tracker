@@ -5,7 +5,6 @@ export enum UserRole {
     SUPERVISOR = "supervisor", 
     DEVELOPER = "developer"
 };
-import {bug} from "./bug";
 
 @Entity({name: "user"})
 export class user extends BaseEntity{
@@ -30,16 +29,4 @@ export class user extends BaseEntity{
         default: UserRole.DEVELOPER
     })
     position: UserRole;
-
-    // @Column("varchar", {length: 255, nullable: true})
-    // bugs_submitted: [];
-
-    // @OneToMany(type => bug,  Bug => Bug.User)
-    // bugsIdSubmitted: bug[];
-
-    // @Column("varchar", {length: 255, nullable: true})
-    // bugs_processor: [];
-
-    // @OneToMany(type => bug, Bug => Bug.User)
-    // bugsIdProcessor: bug[];
 }

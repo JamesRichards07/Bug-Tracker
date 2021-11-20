@@ -2,10 +2,8 @@ import express, { Application, Request, Response, NextFunction, response } from 
 const app = express();
 
 require("dotenv").config();
-import { result } from "lodash";
 const typeorm = require("typeorm");
 import 'reflect-metadata';
-import {getConnectionManager, Connection, getConnection, createConnection, EntityManager} from "typeorm";
 
 const bugRoutes = require("./Routes/bugs");
 const userRoutes = require("./Routes/users");
@@ -20,9 +18,9 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     'Access-Control-Allow-Headers', 
-    "Origin, X-Requested-With, Content-Type, Accept, Autorization, imageURL, email"
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization, imageURL, email"
     );
-  res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELTE, OPTIONS"
+  res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS"
     );
     
   next();
@@ -34,7 +32,6 @@ app.use("/user_login", user_loginRoutes);
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500);
-  console.log(error);
   
   res.json({
     error:{

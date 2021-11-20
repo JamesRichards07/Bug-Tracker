@@ -1,4 +1,5 @@
 {
+  "homepage": "https://jamesrichards07.git.io/bugTracker/",
   "name": "react-app",
   "version": "0.1.0",
   "private": true,
@@ -7,6 +8,8 @@
     "@types/react-router-dom": "^5.1.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-dropdown": "^1.9.2",
+    "react-icons": "^4.3.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3"
   },

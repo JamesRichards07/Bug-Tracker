@@ -1,9 +1,7 @@
 import { NextFunction, Request, Response} from "express";
-import { getConnection, getRepository } from "typeorm";
+import { getRepository } from "typeorm";
 import {user} from "../Models/user";
 import {user_login} from "../Models/user_login";
-import {bug} from "../Models/bug";
-interface MulterRequest extends Request {file: any};
 const checkAuth = import('../Middleware/checkAuth');
 
 exports.user_get_all = async function(req: Request, res: Response){
@@ -17,7 +15,6 @@ exports.user_get_user = async function(req: Request, res: Response){
 
     await user.findOne(id)
     .then(doc => {
-        console.log("from database", doc);
         if(doc){
             res.status(200).json({
                 user: doc
@@ -30,7 +27,6 @@ exports.user_get_user = async function(req: Request, res: Response){
         };
     })
     .catch(err => {
-        console.log(err)
         res.status(500).json({
             error: err
         });
@@ -42,7 +38,8 @@ exports.user_update_user = async function(req: Request, res: Response){
     const User = await getRepository(user)
     .createQueryBuilder("User")
     .where("User.id = :id", req.params)
-    .getOne();;
+    .getOne();
+    
     
     try{
         User;
@@ -61,53 +58,41 @@ exports.user_update_user = async function(req: Request, res: Response){
 
     await User?.save()
     .then(result => {
-        console.log(result);
         res.status(201).json(User);
     })
     .catch(err => {
-        console.log(err);
         res.status(500).json({
             error: err
         });
     });
 };
 
-// exports.delete_user = async function(req: Request, res: Response){
-//     const { id } = req.params;
-
-//     await user.delete(id)
-//     .then(result => {
-//         res.status(200).json({
-//             message: "User successfully deleted.",
-//             req: {
-//                 type: "Post",
-//                 url: 'http://localhost:3000/user/',
-//                 body: { firstName: "String", lastName: "String", email: "String", team: "String", position: "String"}
-//             }
-//         });
-//     })
-//     .catch(err => {
-//         console.log(err);
-//         res.status(500).json({
-//             error: err
-//         });
-//     });
-// };
-
 exports.delete_user = async function(req: Request, res: Response, next: NextFunction){
     
     const {id} = req.params;
-    const {email} = req.body.email;
+    const email = req.body.email;
 
-    const User_login = await getRepository(user_login)
-    .createQueryBuilder("User_Login")
-    .where("User_Login.email = :email", {email: req.body.email})
-    .getOne()
+    const userLoggedIn = await getRepository(user_login)
+    .createQueryBuilder("userLogin")
+    .where("userLogin.email = :email", {email: email})
+    .getOne();
+
+    const selectedUser = await getRepository(user)
+    .createQueryBuilder("User")
+    .where("User.id = :id", {id: id })
+    .getOne();
+
+    if(userLoggedIn !== undefined && selectedUser !== undefined && selectedUser.email === email){
+
+    }
+    else{
+        return console.log("User not found.")
+    };
 
     try{
-        User_login;
+        userLoggedIn;
 
-        const ul_id:any = User_login?.id;
+        const ul_id:any = userLoggedIn?.id;
 
         await user_login.delete(ul_id);
         await user.delete(id)
@@ -116,15 +101,15 @@ exports.delete_user = async function(req: Request, res: Response, next: NextFunc
                 message: "User successfully deleted.",
                 req: {
                     type: "Post",
-                    url: 'http://localhost:3000/user/',
+                    url: 'http://localhost:8080/user/',
                     body: { firstName: "String", lastName: "String", email: "String", team: "String", position: "String"}
                 }
             });
         })
     }
-    catch{
+    catch (error) {
         res.status(500).json({
             message: "No valid entry provided."
         });
-    };
+    }
 };

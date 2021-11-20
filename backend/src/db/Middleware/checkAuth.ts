@@ -41,8 +41,6 @@ exports.devAuth = async (req: IGetUserAuthInfoRequest,  res: Response, next: Nex
         .where("Bug.id = :id", {id: req.params.id})
         .getOne();
 
-        console.log("Bug processor: " + Bug?.processor);
-
         if(Bug?.status === "Created"){
             const bugSubmitterUserId: string = Bug?.submitter;
 
