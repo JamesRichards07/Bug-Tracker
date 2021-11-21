@@ -1,10 +1,10 @@
 import { Switch, Route} from 'react-router-dom';
 
-import HomePage from './pages/home';
+import HomePage from './pages/Home';
 import AllUsersPage from './pages/all_users';
 import AllUserLoginsPage from './pages/all_user_logins';
 import BugsPage from './pages/bugs';
-import WelcomePage from './pages/welcome';
+import WelcomePage from './pages/Welcome';
 import UserLoginPage from './pages/user_login';
 import UserSignupPage from './pages/user_signup';
 import MainNavigation from './components/Layout/main_navigation';
