@@ -4,7 +4,7 @@ import {user_login} from "../Models/user_login";
 import {user} from "../Models/user";
 import jwt = require("jsonwebtoken");
 
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 
 exports.new_user_signup = async function(req: Request, res: Response, NextFunction){
     await user.find({email: req.body.email})
