@@ -20,7 +20,7 @@ function UserModal(props:any){
                 body: JSON.stringify({"email": selectedUser.email})
             }
         ).then(() => {
-            history.replace("/bugtracker/users");
+            history.replace("/users");
         })
     }
 

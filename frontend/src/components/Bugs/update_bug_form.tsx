@@ -219,7 +219,7 @@ function UpdateBugForm(props: any){
             </div>
             <div className="flex space-x-56 pt-12">
                 <div className="p-2">
-                    <Link className="rounded text-black pl-3" to="/bugTracker/bugs">{"<-- Back"}</Link>
+                    <Link className="rounded text-black pl-3" to="/bugs">{"<-- Back"}</Link>
                 </div>
                 <button 
                     type="submit"

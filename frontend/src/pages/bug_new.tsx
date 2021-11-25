@@ -21,7 +21,7 @@ function NewBugPage(){
         )
         .then(response => response.json())
         .then(data => {
-            history.replace("/bugTracker/bugs")
+            history.replace("/bugs")
         })
     }
 

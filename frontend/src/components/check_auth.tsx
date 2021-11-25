@@ -17,7 +17,7 @@ export function CheckAuth(){
    const history = useHistory();
 
    if(!userInfo.userIsloggedIn){
-      history.replace("/bugTracker");
+      history.replace("/");
   }
   else{
      return;

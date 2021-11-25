@@ -1,5 +1,4 @@
-FROM node:latest
-#FROM mysql
+FROM node:alpine
 
 #Sets the working directory in Docker instead of copying the local root folder into Docker.
 WORKDIR /app

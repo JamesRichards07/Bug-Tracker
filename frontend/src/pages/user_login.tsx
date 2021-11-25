@@ -22,7 +22,7 @@ function UserLoginPage(props:any){
             userInfo.email = loginData.email;
             userInfo.authorization = "Bearer " + data.token;
             userInfo.userIsloggedIn = true;
-            history.replace("/bugTracker/home");
+            history.replace("/home");
         })
     };
 

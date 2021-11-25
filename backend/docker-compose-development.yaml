@@ -10,11 +10,14 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.development
     ports: 
       - 8080:8080
     volumes:
-      - api-data:/app/public/images/
+      - .:/app
+      - /app/node_modules
 
 volumes:
   db-data:

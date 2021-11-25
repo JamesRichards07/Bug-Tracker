@@ -14,7 +14,7 @@ function BugList(props:any){
                 <th className="bg-gray-200 border text-left px-2 py-2">Assigned To:</th>
                 <th className="bg-gray-200 border text-left px-2 py-2">Status:</th>
                 <th className="bg-gray-200 border text-left px-2 py-2">
-                    <Link className="bg-green-400 px-1 text-white rounded-full h-8 w-44 text-lg text-center" to="/bugTracker/bugs/new">
+                    <Link className="bg-green-400 px-1 text-white rounded-full h-8 w-44 text-lg text-center" to="/bugs/new">
                         + Create New
                     </Link>
                 </th>

@@ -130,7 +130,7 @@ function UpdateUserForm(props: any){
                 </div>
                 <div className="flex space-x-28 pt-10">
                     <div className="p-2">
-                        <Link className="rounded text-black" to="/bugTracker/users">{"<-- Back"}</Link>
+                        <Link className="rounded text-black" to="/users">{"<-- Back"}</Link>
                     </div>
                     <button 
                         type="submit"

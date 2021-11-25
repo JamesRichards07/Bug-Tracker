@@ -19,7 +19,7 @@ function BugModal(props:any){
                 },
             }
         ).then(() => {
-            history.replace("/bugtracker/bugs");
+            history.replace("/bugs");
         })
     }
 

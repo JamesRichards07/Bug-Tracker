@@ -19,51 +19,51 @@ function App(){
     return (
         <div>
             <Switch>
-            <Route path='/bugTracker' exact>
+            <Route path='/' exact>
                 <LoginNavigation/>
                 <WelcomePage/>
             </Route>
-            <Route path='/bugTracker/login' exact>
+            <Route path='/login' exact>
                 <LoginNavigation/>
                 <UserLoginPage/>
             </Route>
-            <Route path='/bugTracker/signup' exact>
+            <Route path='/signup' exact>
                 <LoginNavigation/>
                 <UserSignupPage/>
             </Route>
-            <Route path='/bugTracker/home' exact>
+            <Route path='/home' exact>
                 <MainNavigation/>
                 <HomePage/>
             </Route>
-            <Route path='/bugTracker/users' exact>
+            <Route path='/users' exact>
                 <MainNavigation/>
                 <AllUsersPage/>
             </Route>
-            <Route path='/bugTracker/user/view/*' exact>
+            <Route path='/user/view/*' exact>
                 <MainNavigation/>
                 <UpdateUserPage/>
             </Route>
-            <Route path='/bugTracker/user/delete/*' exact>
+            <Route path='/user/delete/*' exact>
                 <MainNavigation/>
                 <DeleteUserPage/>
             </Route>
-            <Route path='/bugTracker/bugs' exact>
+            <Route path='/bugs' exact>
                 <MainNavigation/>
                 <BugsPage/>
             </Route>
-            <Route path='/bugTracker/bugs/new' exact>
+            <Route path='/bugs/new' exact>
                 <MainNavigation/>
                 <NewBugPage/>
             </Route>
-            <Route path='/bugTracker/bugs/view/*' exact>
+            <Route path='/bugs/view/*' exact>
                 <MainNavigation/>
                 <UpdateBugPage/>
             </Route>
-            <Route path='/bugTracker/bugs/delete/*' exact>
+            <Route path='/bugs/delete/*' exact>
                 <MainNavigation/>
                 <DeleteBugPage/>
             </Route>
-            <Route path='/bugTracker/userLogins' exact>
+            <Route path='/userLogins' exact>
                 <MainNavigation/>
                 <AllUserLoginsPage/>
             </Route>

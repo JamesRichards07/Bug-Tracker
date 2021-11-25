@@ -18,7 +18,7 @@ function UserSignupPage(){
         )
         .then(response => response.json())
         .then(data => {
-            history.replace("/bugTracker")
+            history.replace("/")
         })
     }
 

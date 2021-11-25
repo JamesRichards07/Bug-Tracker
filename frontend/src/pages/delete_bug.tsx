@@ -15,7 +15,7 @@ function DeleteUserPage(){
 
     function closeModalHandler(){
         setModalIsOpen(false);
-        history.replace("/bugTracker/bugs");
+        history.replace("/bugs");
     }
 
     return(

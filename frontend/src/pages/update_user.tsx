@@ -48,7 +48,7 @@ function UpdateUserPage(props: any){
             }
         )
         .then(() => {
-            history.replace("/bugTracker/users")
+            history.replace("/users")
         })
     } 
 

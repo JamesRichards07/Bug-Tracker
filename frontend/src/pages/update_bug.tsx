@@ -48,7 +48,7 @@ function UpdateBugPage(props: any){
             }
         )
         .then(() => {
-            history.replace("/bugTracker/bugs")
+            history.replace("/bugs")
         })
     } 
 

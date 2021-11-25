@@ -8,15 +8,15 @@ function WelcomePage(props: any){
             <h2 className="pb-5 text-center">
                 Internal communication is paramount for a business, and this program strives to 
             provide a usable tool to track bugs, issues or tasks which can then be assigned 
-            to designated team members to fix or complete. 
+            to designated team members to fix or complete.
             </h2>
 
             <h3>Please 
-                <Link className="text-blue-600" to="/bugTracker/login"> Login </Link>
+                <Link className="text-blue-600" to="/login"> Login </Link>
                 
                 or 
                 
-                <Link className='text-green-600' to="/bugTracker/signup"> Sign Up </Link>
+                <Link className='text-green-600' to="/signup"> Sign Up </Link>
                 
                 to get started.</h3>
             

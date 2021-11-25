@@ -1,0 +1,18 @@
+To do:
+Lock all verisons
+Search how to host docker on AWS
+
+# Accessing docker containers
+1. docker exec -it container ID bash  
+2. psql -U postgres
+3. Show tables
+    - \dt
+
+    ### Getting Started
+1. Run `npm install`. This will install the dependencies needed to run the Bug Tracker.
+2. Add a .env file to the root diretory to access the postgres database and creation of a JWT:
+    `db_pw = db-password-goes-here`
+    `JWT_KEY = private-key-goes-here`
+6. On start there is one user with "manager" access:
+    email: test@gmail.com
+    password: 123456
