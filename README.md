@@ -1,5 +1,10 @@
 # Bug-Tracker 
 
+## To Launch
+1. Clone the repo and open it in your favorite IDE. 
+2. Install Docker (if not already installed on your machine). https://docs.docker.com/get-docker/
+3. Navigate to the cloned repo and run "docker compose up"
+
 ## Overview
 Internal communication is paramount for a business, and this program strives to provide a usable tool to track bugs, issues or tasks which can then be assigned to designated team members to fix or complete. 
 
@@ -11,9 +16,6 @@ This Restful SQL API was built out of my aspiration to continually challenge mys
     - React
     - Tailwind
     - AWS
-
-### Database
-Hosted in AWS
 
 ### Formating
 Most requests are made in JSON except when creating a new bug/task which uses form-data.
