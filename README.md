@@ -24,7 +24,7 @@ Most requests are made in JSON except when creating a new bug/task which uses fo
 
 ### Authorization
 Developer - limited access.  
-    Requests include:  
+    *Requests include:*  
         GET - users, users.id, bugs, and bug.id information  
         POST - new bugs  
         PATCH:  
@@ -32,12 +32,12 @@ Developer - limited access.
             - bugs they are assigned to as a processor.  
 
 Supervisor - semi-limited access  
-    Requests include:  
+    *Requests include:*  
         All developer requests  
         PATCH - any bug information  
 
 Manager (default) - complete access  
-    Requests include:  
+    *Requests include:*  
         All supervisor requests  
         GET - user login information  
         PATCH - any user or user login information  
