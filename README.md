@@ -23,7 +23,7 @@ This Restful SQL API was built out of my aspiration to continually challenge mys
 Most requests are made in JSON except when creating a new bug/task which uses form-data.
 
 ### Authorization
-<ins>Developer<ins> - limited access.  
+<ins>Developer</ins> - limited access.  
     *Requests include:*  
         GET - users, users.id, bugs, and bug.id information  
         POST - new bugs  
@@ -31,12 +31,12 @@ Most requests are made in JSON except when creating a new bug/task which uses fo
             - bugs they have submitted so long as a processor has not been assigned.  
             - bugs they are assigned to as a processor.  
 
-<ins>Supervisor<ins> - semi-limited access  
+<ins>Supervisor</ins> - semi-limited access  
     *Requests include:*  
         All developer requests  
         PATCH - any bug information  
 
-<ins>Manager<ins> (default) - complete access  
+<ins>Manager</ins> (default) - complete access  
     *Requests include:*  
         All supervisor requests  
         GET - user login information  
