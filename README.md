@@ -3,7 +3,7 @@
 ## Overview
 Internal communication is paramount for a business, and this program strives to provide a usable tool to track bugs, issues or tasks which can then be assigned to designated team members to fix or complete. 
 
-This Restful SQL API was built out of my aspiration to continually challenge myself to write code and programs which are beneficial in real world application. While creating this project I deepened my understanding in API's, Typescript, Express, HTML/CSS while simultaneously picking up a few new tools such as: \n
+This Restful SQL API was built out of my aspiration to continually challenge myself to write code and programs which are beneficial in real world application. While creating this project I deepened my understanding in API's, Typescript, Express, HTML/CSS while simultaneously picking up a few new tools such as:
     - Docker  
     - SQL  
     - PostgreSQL  
@@ -23,25 +23,25 @@ This Restful SQL API was built out of my aspiration to continually challenge mys
 Most requests are made in JSON except when creating a new bug/task which uses form-data.
 
 ### Authorization
-developer - limited access.  
+Developer - limited access.  
     Requests include:  
-        Get - users, users.id, bugs, and bug.id information  
-        Post - new bugs  
-        Patch  
+        GET - users, users.id, bugs, and bug.id information  
+        POST - new bugs  
+        PATCH:  
             - bugs they have submitted so long as a processor has not been assigned.  
             - bugs they are assigned to as a processor.  
 
-supervisor - semi-limited access  
+Supervisor - semi-limited access  
     Requests include:  
         All developer requests  
-        Patch - any bug information  
+        PATCH - any bug information  
 
-manager (default) - complete access  
+Manager (default) - complete access  
     Requests include:  
         All supervisor requests  
-        Get - user login information  
-        Patch - any user or user login information  
-        Delete - any bug, user, or user login information  
+        GET - user login information  
+        PATCH - any user or user login information  
+        DELETE - any bug, user, or user login information  
 
 # Known issues
 1. Authentication is buried in the header when it should be buried in the JWT.
