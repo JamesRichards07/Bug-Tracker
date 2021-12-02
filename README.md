@@ -1,9 +1,12 @@
 # Bug-Tracker 
 
-## To Launch
+## To Launch and Begin Using
 1. Clone this repo.
 2. Install Docker (if not already installed on your machine). https://docs.docker.com/get-docker/
 3. Navigate to the cloned repo in your terminal and run "docker compose up".
+4. Visable in your favorite browser on http://localhost:8000
+5. Click "Sign Up" to create a new user.
+6. Login with newly created user.
 
 ## Overview
 Internal communication is paramount for a business, and this program strives to provide a usable tool to track bugs, issues or tasks which can then be assigned to designated team members to fix or complete. 
@@ -32,22 +35,12 @@ supervisor - semi-limited access \n
         All developer requests \n
         Patch - any bug information
 
-manager - complete access \n
+manager (default) - complete access \n
     Requests include: \n
         All supervisor requests \n
         Get - user login information \n
         Patch - any user or user login information \n
         Delete - any bug, user, or user login information
-
-## Existing Info
-When first launched there is one user with the title of "manager" already present. Use this user to promote a new user to "manager" allowing them access to make any changes to users or bugs. \n
-
-Default User: \n
-Username: \n
-test@gmail.com \n
-\n
-Password: \n
-123456
 
 # Known issues
 1. Authentication is buried in the header when it should be buried in the JWT.
